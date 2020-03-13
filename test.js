@@ -1,22 +1,14 @@
 // Definition for a Node.
-var sortByBits = function(arr) {
-  let convertedNums = [];
+var arrayMaxConsecutiveSum = function(arr) {
+  let maxSum = arr[0];
+  let currentSum = maxSum;
 
-  const countOnes = binaryNum => {
-    let count = 0;
-    return binaryNum
-      .split('')
-      .reduce((tot, n) => (n === '1' ? tot + 1 : tot + 0), 0);
-  };
-
-  for (let i = 0; i < arr.length; i++) {
-    const num = arr[i];
-    console.log('num: ', num);
-    const num1sCount = countOnes(num.toString(2));
-    console.log('num1sCount: ', num1sCount);
+  for (let i = 1; i < arr.length; i++) {
+    currentSum = Math.max(arr[i] + currentSum, arr[i]);
+    maxSum = Math.max(currentSum, maxSum);
   }
 
-  console.log(convertedNums);
+  return maxSum;
 };
 
-console.log(sortByBits([0, 1, 2, 3, 4, 5, 6, 7, 8])); // [0,1,2,4,8,3,5,6,7]
+console.log(arrayMaxConsecutiveSum([4, -20, -2, 2, 4, -4, 0, -11, 6])); // 7
