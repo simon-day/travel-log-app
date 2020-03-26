@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { listLogEntries } from './API';
+import LogEntryForm from './LogEntryForm';
 
 const App = () => {
   const [logEntries, setLogEntries] = useState([]);
@@ -73,6 +74,10 @@ const App = () => {
               <div className="popup">
                 <h3>{logEntry.title}</h3>
                 <p>{logEntry.comments}</p>
+                <small>
+                  Visited on:{' '}
+                  {new Date(logEntry.visitDate).toLocaleDateString()}
+                </small>
               </div>
             </Popup>
           ) : null}
@@ -87,8 +92,8 @@ const App = () => {
             <div>
               <img
                 style={{
-                  height: `${8 * viewport.zoom}px`,
-                  width: `${8 * viewport.zoom}px`
+                  height: `${7.5 * viewport.zoom}px`,
+                  width: `${7.5 * viewport.zoom}px`
                 }}
                 className="marker"
                 src="https://image.flaticon.com/icons/png/512/37/37134.png"
@@ -106,7 +111,7 @@ const App = () => {
             anchor="top"
           >
             <div className="popup">
-              <h3>Add Your New Entry Here:</h3>
+              <LogEntryForm />
             </div>
           </Popup>
         </>
